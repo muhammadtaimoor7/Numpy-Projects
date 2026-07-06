@@ -1,0 +1,22 @@
+#GAME SCORE ANALYZER PROJECT
+import numpy as np
+#random scores(0,100) 5 rows 4 columns
+scores=np.random.randint(0,100,(5,4)) #random.randit keyword
+#(5,4)shows rows and colmns
+print(scores)
+#step 2
+total_score=np.sum(scores,axis=1)
+print("The total score per player is:",total_score)
+
+#step 3
+highest_score=np.max(scores,axis=0)
+print("The highest score per round:",highest_score)
+
+# Step 4 – Sort players by total score
+player_rank = np.argsort(total_score)[::-1] #argsort =ascending ,-1 descending
+#as we want top so we sort them
+print("Players sorted by total score (highest first):", player_rank)
+
+#step 5
+more = scores[scores > 50] 
+print("Players having score more than 50:", more)

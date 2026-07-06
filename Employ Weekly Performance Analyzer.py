@@ -1,0 +1,98 @@
+#EMPLOYEE WEEKLY PERFORMANCE ANALYZER
+#Step 1
+import numpy as np
+score=np.array([
+    [33,67,54,24,89,70,76],
+    [45,56,78,90,100,45,98],
+    [55,66,78,90,80,45,98],
+    [95,56,58,90,20,45,88],
+    [23,67,88,80,90,100,34],
+    [67,54,34,98,87,75,40]
+])
+
+#total score per employee
+#Step 2 
+total_score=np.sum(score,axis=1)
+print("Score per Employee:",total_score)
+
+# Top 3 employees (highest score)
+#Step 3
+#values of total score in  ascending order
+sorted=np.argsort(total_score)
+#argsort will take the large values at end 
+print("Ascending order:",sorted)
+#now i want to bring top 3 scorers at start
+top_scores=sorted[-3:] # bcz highest values are at end 
+print("Top 3 vlues at start:",top_scores)
+top_scores=top_scores[::-1] #-::1 =for reversing array
+ # we we will reverse and print highest first and so on
+ # means in a correct order
+print("Now highest values first:",top_scores)
+#now actual top 3
+actual_top3=total_score[top_scores]
+print("TOP 3 scorers are:",actual_top3)
+
+#Step 4
+#bottom 2 employess 
+row_wise_mean=np.mean(score,axis=1)
+print("Row wise mean:",row_wise_mean)
+#use of argsort for indxexing
+sorting=np.argsort(row_wise_mean)
+print("after argsort:",sorting)
+#here 1st and 2 indexes are bottom values so we will get  them
+bottom_score=sorting[:2]
+print(bottom_score)
+#now we will give actual scores
+actual_scores=row_wise_mean[bottom_score]
+print("Actual bottom values:",actual_scores)
+
+# top 3 and bottom 3 scores are printed 
+
+#Step 5
+#Midweek Average (Wed–Fri)
+#here we want score of 3 days
+#and their average
+midweek_scores=score[:,2:5]
+print("Mid week scores:",midweek_scores)
+#now average
+midweek_avg = np.mean(midweek_scores,axis=1)
+print("Average in mid week:",midweek_avg)
+
+#Step 6
+#weekend total
+weekend_scores=score[:,5:7] # it will give for weekend
+print("Weekend scores;",weekend_scores)
+weekend_total=np.sum(weekend_scores,axis=1)
+print("Total weekend scores;",weekend_total)
+
+#step 7
+#filter score greater tha 75
+score_filter=score[score>75]
+print(score_filter)
+
+#step 8
+#Flatten Array + Top 10 Scores
+
+Flatten= score.flatten()
+print(Flatten)
+#Top 10 scores
+top_10_scores = np.sort(Flatten)[-10:][::-1]
+#bcz top values are always at end so -10 is used
+#again same reverse step[-1]is so used
+print(top_10_scores)
+
+
+#Step 9
+#Max & Min Score per Employee
+max_score=np.max(score,axis=1)
+print(max_score)
+min_score=np.min(score,axis=1)
+print(min_score)
+
+#step 10
+#Employees Scoring Exactly 100
+mask = (score == 100)
+
+# 2️⃣ np.where to get indexes
+positions = np.where(mask)
+print(positions)
